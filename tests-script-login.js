@@ -15,14 +15,24 @@ pm.test("accessToken should be a string",function(){
 
 //verify time hh:mm
 function validateTime(time){
-    var isValid = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/.test(time.value);
-    return isValid;
+    const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+    if(time.match(timeReg)===null){
+        return false;
+    }
+    else{
+        return true;
+    }
 }
 
 //verify datetime yyyy-mm-dd hh:mm:ss
 function validDateTime(datetime) {
-    var isValid = /^\d{4}-(0[1-9]|1[0-2])-([0-2]\d|3[01]) (0\d|1[01]):[0-5]\d:[0-5]\d$/;
-    return isValid.test(datetime);
+    var dateReg = /^\d{4}-(0[1-9]|1[0-2])-([0-2]\d|3[01]) (0\d|1[01]):[0-5]\d:[0-5]\d$/;
+    if(datetime.match(dateReg)===null){
+        return false;
+    }
+    else{
+        return true;
+    }
 }
 
 //test string timeZoneInfos
@@ -35,7 +45,9 @@ for(let i=0;i<timeZoneLength;i++){
     });
 
     //test format startAt
-    pm.test(arrTimeZone[i].startAt+": startAt should be true format",validateTime(arrTimeZone[i].startAt));
+    pm.test(arrTimeZone[i].startAt+": startAt should be true format",function(){
+        pm.expect(validateTime(arrTimeZone[i].startAt)).to.be.true;
+    });
 
     //test string timeZoneName
     pm.test(arrTimeZone[i].startAt+": timeZoneName should be a string",function(){
@@ -63,7 +75,9 @@ for(let i=0;i<specificDateLength;i++){
     });
 
     //test format startAt
-    pm.test(arrSpecificDate[i].title+": startAt should be true format",validDateTime(arrSpecificDate[i].startAt));
+    pm.test(arrSpecificDate[i].title+": startAt should be true format",function(){
+        pm.expect(validDateTime(arrSpecificDate[i].startAt)).to.be.true;
+    });
 
     //test string endAt
     pm.test(arrSpecificDate[i].title+": endAt should be a string",function(){
@@ -71,7 +85,9 @@ for(let i=0;i<specificDateLength;i++){
     });
 
     //test format endAt
-    pm.test(arrSpecificDate[i].title+": endAt should be true format",validDateTime(arrSpecificDate[i].endAt));
+    pm.test(arrSpecificDate[i].title+": endAt should be true format",function(){
+        pm.expect(validDateTime(arrSpecificDate[i].endAt)).to.be.true;
+    });
 
     //test string title
     pm.test(arrSpecificDate[i].title+": title should be a string",function(){
@@ -95,14 +111,7 @@ var arrBadge = Object.keys(jsonData.schema.globalParameters.badge);
 var arrBadgeValue = Object.values(jsonData.schema.globalParameters.badge);
 
 for(let i=0;i<badgeLength;i++){
-    if(arrBadgeValue[i]===true){
-        pm.test(arrBadge[i]+": should be a boolean",function(){
-            pm.expect(arrBadgeValue[i]).to.be.true;
-        });
-    }
-    else if(arrBadgeValue[i]===false){
-        pm.test(arrBadge[i]+": should be a boolean",function(){
-            pm.expect(arrBadgeValue[i]).to.be.false;
-        });
-    }
+    pm.test(arrBadge[i]+": should be a boolean",function(){
+        pm.expect(typeof arrBadgeValue[i] === "boolean").to.be.true;
+    });
 }
