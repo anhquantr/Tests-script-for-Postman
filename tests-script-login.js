@@ -26,7 +26,7 @@ function validateTime(time){
 
 //verify datetime yyyy-mm-dd hh:mm:ss
 function validDateTime(datetime) {
-    var dateReg = /^\d{4}-(0[1-9]|1[0-2])-([0-2]\d|3[01]) (0\d|1[01]):[0-5]\d:[0-5]\d$/;
+    var dateReg = /^\d{4}-(0[1-9]|1[0-2])-([0-2]\d|3[01]) (0\d|1\d|2[0-3]):[0-5]\d:[0-5]\d$/;
     if(datetime.match(dateReg)===null){
         return false;
     }
