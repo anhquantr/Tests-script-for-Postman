@@ -1,0 +1,50 @@
+{
+    "description": "Success.",
+    "schema": {
+        "accessToken": "12345",
+        "globalParameters": {
+            "timeZoneInfos": [
+                {
+                    "startAt": "00:00",
+                    "timeZoneName": "night",
+                    "title": "Good Morning",
+                    "subTitle": "hello anhquantran"
+                },
+                {
+                    "startAt": "06:00",
+                    "timeZoneName": "night",
+                    "title": "Good Morning",
+                    "subTitle": "hi anhquantran"
+                },
+                {
+                    "startAt": "11:00",
+                    "timeZoneName": "night",
+                    "title": "Hello",
+                    "subTitle": "bye anhquantran"
+                },
+                {
+                    "startAt": "18:00",
+                    "timeZoneName": "night",
+                    "title": "Good Evening",
+                    "subTitle": "good bye anhquantran"
+                }
+            ],
+            "specificDateTimes": [
+                {
+                    "startAt": "2021-01-01 00:00:00",
+                    "endAt": "2021-01-01 23:59:59",
+                    "title": "Happy New Year",
+                    "subTitle": "HNY anhquantran"
+                }
+            ],
+            "point": 230,
+            "badge": {
+                "home": false,
+                "measurement": true,
+                "coupon": false,
+                "myKarte": true,
+                "applyIcon": false
+            }
+        }
+    }
+}
