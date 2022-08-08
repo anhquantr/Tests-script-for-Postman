@@ -26,7 +26,7 @@ function validateTime(time){
 
 //verify datetime yyyy-mm-dd hh:mm:ss
 function validDateTime(datetime) {
-    var dateReg = /^\d{4}-(0[1-9]|1[0-2])-([0-2]\d|3[01]) (0\d|1\d|2[0-3]):[0-5]\d:[0-5]\d$/;
+    var dateReg = /^((((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[13578]|10|12)([-])(0[1-9]|[12][0-9]|3[01]))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[469]|11)([-])([0][1-9]|[12][0-9]|30))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(02)([-])(0[1-9]|1[0-9]|2[0-8]))|(([02468][048]00)([-])(02)([-])(29))|(([13579][26]00)([-])(02)([-])(29))|(([0-9][0-9][0][48])([-])(02)([-])(29))|(([0-9][0-9][2468][048])([-])(02)([-])(29))|(([0-9][0-9][13579][26])([-])(02)([-])(29))) (0\d|1\d|2[0-3]):[0-5]\d:[0-5]\d$/;
     if(datetime.match(dateReg)===null){
         return false;
     }
@@ -69,6 +69,9 @@ for(let i=0;i<timeZoneLength;i++){
 var specificDateLength = jsonData.schema.globalParameters.specificDateTimes.length;
 var arrSpecificDate = jsonData.schema.globalParameters.specificDateTimes;
 for(let i=0;i<specificDateLength;i++){
+    var date1Updated = new Date(arrSpecificDate[i].startAt.replace(/-/g,'/'));  
+    var date2Updated = new Date(arrSpecificDate[i].endAt.replace(/-/g,'/'));
+
     //test string startAt
     pm.test(arrSpecificDate[i].title+": startAt should be a string",function(){
     pm.expect(arrSpecificDate[i].startAt).to.be.a('string');
@@ -88,6 +91,15 @@ for(let i=0;i<specificDateLength;i++){
     pm.test(arrSpecificDate[i].title+": endAt should be true format",function(){
         pm.expect(validDateTime(arrSpecificDate[i].endAt)).to.be.true;
     });
+
+    //compare 2 dates
+    if(date1Updated>=date2Updated){
+        pm.test(arrSpecificDate[i].title+": startAt should be less than endAt",function(){
+            pm.expect(date1Updated).to.be.lessThan(date2Updated);
+        });
+    }else{
+        pm.test(arrSpecificDate[i].title+": startAt should be less than endAt");
+    }
 
     //test string title
     pm.test(arrSpecificDate[i].title+": title should be a string",function(){
