@@ -5,43 +5,91 @@
         "globalParameters": {
             "timeZoneInfos": [
                 {
-                    "startAt": "00:00",
+                    "startAt": "aa:aa",
                     "timeZoneName": "night",
                     "title": "Good Morning",
                     "subTitle": "hello anhquantran"
                 },
                 {
-                    "startAt": "06:00",
+                    "startAt": "06:00:00",
                     "timeZoneName": "night",
                     "title": "Good Morning",
                     "subTitle": "hi anhquantran"
                 },
                 {
-                    "startAt": "11:00",
+                    "startAt": "24:00:00",
+                    "timeZoneName": "night",
+                    "title": "Good Morning",
+                    "subTitle": "hi bobo"
+                },
+                {
+                    "startAt": "23:60",
                     "timeZoneName": "night",
                     "title": "Hello",
                     "subTitle": "bye anhquantran"
                 },
                 {
+                    "startAt": "24:01",
+                    "timeZoneName": "night",
+                    "title": "Good Morning",
+                    "subTitle": "hi bobo"
+                },
+                {
                     "startAt": "18:00",
                     "timeZoneName": "night",
                     "title": "Good Evening",
-                    "subTitle": "good bye anhquantran"
+                    "subTitle": 34
                 }
             ],
             "specificDateTimes": [
                 {
-                    "startAt": "2021-01-01 00:00:00",
-                    "endAt": "2021-01-01 23:59:59",
+                    "startAt": "2021-12-24",
+                    "endAt": "2021-12-25 24:00:01",
+                    "title": "Merry Christmas",
+                    "subTitle": "HNY anhquantran"
+                },
+                {
+                    "startAt": "2021-01-01 00:00:60",
+                    "endAt": "2021-01-31 23:59",
                     "title": "Happy New Year",
+                    "subTitle": "HNY anhquantran"
+                },
+                {
+                    "startAt": "2021-02-29 00:00:00",
+                    "endAt": "2021-01-32 23:59:59",
+                    "title": "Woman's Day",
+                    "subTitle": "HNY anhquantran"
+                },
+                {
+                    "startAt": "2021-04-31 23:59:59",
+                    "endAt": "2021-03-32 23:00:00",
+                    "title": "Woman's Day",
+                    "subTitle": "HNY anhquantran"
+                },
+                {
+                    "startAt": "2020-02-29 00:00:00",
+                    "endAt": "2020-02-30 23:59:59",
+                    "title": "Leap Year",
+                    "subTitle": "HNY anhquantran"
+                },
+                {
+                    "startAt": "2021-12 00:00:00",
+                    "endAt": "2021 23:59:59",
+                    "title": "Hello Decmember",
+                    "subTitle": "HNY anhquantran"
+                },
+                {
+                    "startAt": "2021-02-01 00:00:00",
+                    "endAt": "2021-01-31 23:59:59",
+                    "title": "Happy Febuary",
                     "subTitle": "HNY anhquantran"
                 }
             ],
             "point": 230,
             "badge": {
                 "home": false,
-                "measurement": true,
-                "coupon": false,
+                "measurement": "hello",
+                "coupon": 20,
                 "myKarte": true,
                 "applyIcon": false
             }
