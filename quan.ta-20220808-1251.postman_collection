@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "039b9ead-eaaa-4c81-a7ef-7ed6f1694d77",
+		"name": "quan.ta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22118295"
+	},
+	"item": [
+		{
+			"name": "quan.ta/api/login?email=anhquantran.info@gmail.com&password=Test.1112",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//set data to all APIs\r",
+							"const jsonData = pm.response.json();\r",
+							"var accessToken = jsonData.schema.accessToken;\r",
+							"pm.globals.set('accessToken', accessToken);\r",
+							"\r",
+							"//test successful POST request\r",
+							"pm.test(\"Successful POST request\",function(){\r",
+							"    pm.expect(pm.response.code).to.be.eql(200);\r",
+							"});\r",
+							"\r",
+							"//test string accessToken\r",
+							"pm.test(\"accessToken should be a string\",function(){\r",
+							"    pm.expect(jsonData.schema.accessToken).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"//verify time hh:mm\r",
+							"function validateTime(time){\r",
+							"    const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;\r",
+							"    if(time.match(timeReg)===null){\r",
+							"        return false;\r",
+							"    }\r",
+							"    else{\r",
+							"        return true;\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"//verify datetime yyyy-mm-dd hh:mm:ss\r",
+							"function validDateTime(datetime) {\r",
+							"    var dateReg = /^((((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[13578]|10|12)([-])(0[1-9]|[12][0-9]|3[01]))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[469]|11)([-])([0][1-9]|[12][0-9]|30))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(02)([-])(0[1-9]|1[0-9]|2[0-8]))|(([02468][048]00)([-])(02)([-])(29))|(([13579][26]00)([-])(02)([-])(29))|(([0-9][0-9][0][48])([-])(02)([-])(29))|(([0-9][0-9][2468][048])([-])(02)([-])(29))|(([0-9][0-9][13579][26])([-])(02)([-])(29))) (0\\d|1\\d|2[0-3]):[0-5]\\d:[0-5]\\d$/;\r",
+							"    if(datetime.match(dateReg)===null){\r",
+							"        return false;\r",
+							"    }\r",
+							"    else{\r",
+							"        return true;\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"//test string timeZoneInfos\r",
+							"var timeZoneLength = jsonData.schema.globalParameters.timeZoneInfos.length;\r",
+							"var arrTimeZone = jsonData.schema.globalParameters.timeZoneInfos;\r",
+							"for(let i=0;i<timeZoneLength;i++){\r",
+							"    //test string startAt\r",
+							"    pm.test(arrTimeZone[i].startAt+\": startAt should be a string\",function(){\r",
+							"    pm.expect(arrTimeZone[i].startAt).to.be.a('string');\r",
+							"    });\r",
+							"\r",
+							"    //test format startAt\r",
+							"    pm.test(arrTimeZone[i].startAt+\": startAt should be true format\",function(){\r",
+							"        pm.expect(validateTime(arrTimeZone[i].startAt)).to.be.true;\r",
+							"    });\r",
+							"\r",
+							"    //test string timeZoneName\r",
+							"    pm.test(arrTimeZone[i].startAt+\": timeZoneName should be a string\",function(){\r",
+							"    pm.expect(arrTimeZone[i].timeZoneName).to.be.a('string');\r",
+							"    });\r",
+							"\r",
+							"    //test string title\r",
+							"    pm.test(arrTimeZone[i].startAt+\": title should be a string\",function(){\r",
+							"    pm.expect(arrTimeZone[i].title).to.be.a('string');\r",
+							"    });\r",
+							"\r",
+							"    //test string subTitle\r",
+							"    pm.test(arrTimeZone[i].startAt+\": subTitle should be a string\",function(){\r",
+							"    pm.expect(arrTimeZone[i].subTitle).to.be.a('string');\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"//test string specificDateTimes\r",
+							"var specificDateLength = jsonData.schema.globalParameters.specificDateTimes.length;\r",
+							"var arrSpecificDate = jsonData.schema.globalParameters.specificDateTimes;\r",
+							"for(let i=0;i<specificDateLength;i++){\r",
+							"    var date1Updated = new Date(arrSpecificDate[i].startAt.replace(/-/g,'/'));  \r",
+							"    var date2Updated = new Date(arrSpecificDate[i].endAt.replace(/-/g,'/'));\r",
+							"\r",
+							"    //test string startAt\r",
+							"    pm.test(arrSpecificDate[i].title+\": startAt should be a string\",function(){\r",
+							"    pm.expect(arrSpecificDate[i].startAt).to.be.a('string');\r",
+							"    });\r",
+							"\r",
+							"    //test format startAt\r",
+							"    pm.test(arrSpecificDate[i].title+\": startAt should be true format\",function(){\r",
+							"        pm.expect(validDateTime(arrSpecificDate[i].startAt)).to.be.true;\r",
+							"    });\r",
+							"\r",
+							"    //test string endAt\r",
+							"    pm.test(arrSpecificDate[i].title+\": endAt should be a string\",function(){\r",
+							"    pm.expect(arrSpecificDate[i].endAt).to.be.a('string');\r",
+							"    });\r",
+							"\r",
+							"    //test format endAt\r",
+							"    pm.test(arrSpecificDate[i].title+\": endAt should be true format\",function(){\r",
+							"        pm.expect(validDateTime(arrSpecificDate[i].endAt)).to.be.true;\r",
+							"    });\r",
+							"\r",
+							"    //compare 2 dates\r",
+							"    if(date1Updated>=date2Updated){\r",
+							"        pm.test(arrSpecificDate[i].title+\": startAt should be less than endAt\",function(){\r",
+							"            pm.expect(date1Updated).to.be.lessThan(date2Updated);\r",
+							"        });\r",
+							"    }else{\r",
+							"        pm.test(arrSpecificDate[i].title+\": startAt should be less than endAt\");\r",
+							"    }\r",
+							"\r",
+							"    //test string title\r",
+							"    pm.test(arrSpecificDate[i].title+\": title should be a string\",function(){\r",
+							"    pm.expect(arrSpecificDate[i].title).to.be.a('string');\r",
+							"    });\r",
+							"    \r",
+							"    //test string subTitle\r",
+							"    pm.test(arrSpecificDate[i].title+\": subTitle should be a string\",function(){\r",
+							"    pm.expect(arrSpecificDate[i].subTitle).to.be.a('string');\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"//test number point\r",
+							"pm.test(\"point should be a number\",function(){\r",
+							"    pm.expect(jsonData.schema.globalParameters.point).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"//test bool badge\r",
+							"var badgeLength = Object.keys(jsonData.schema.globalParameters.badge).length;\r",
+							"var arrBadge = Object.keys(jsonData.schema.globalParameters.badge);\r",
+							"var arrBadgeValue = Object.values(jsonData.schema.globalParameters.badge);\r",
+							"\r",
+							"for(let i=0;i<badgeLength;i++){\r",
+							"    pm.test(arrBadge[i]+\": should be a boolean\",function(){\r",
+							"        pm.expect(typeof arrBadgeValue[i] === \"boolean\").to.be.true;\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/quan.ta/api/login?email=anhquantran.info@gmail.com&password=Test.1112",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"quan.ta",
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "anhquantran.info@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "Test.1112"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.1.212/quan.ta/api/login?email=anhquantran.info@gmail.com&password=Test.1112",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"212"
+							],
+							"path": [
+								"quan.ta",
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "anhquantran.info@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "Test.1112"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"description\": \"Success.\",\n    \"schema\": {\n        \"accessToken\": \"12345\",\n        \"globalParameters\": {\n            \"timeZoneInfos\": [\n                {\n                    \"startAt\": \"aa:aa\",\n                    \"timeZoneName\": \"night\",\n                    \"title\": \"Good Morning\",\n                    \"subTitle\": \"hello anhquantran\"\n                },\n                {\n                    \"startAt\": \"06:00:00\",\n                    \"timeZoneName\": \"night\",\n                    \"title\": \"Good Morning\",\n                    \"subTitle\": \"hi anhquantran\"\n                },\n                {\n                    \"startAt\": \"24:00:00\",\n                    \"timeZoneName\": \"night\",\n                    \"title\": \"Good Morning\",\n                    \"subTitle\": \"hi bobo\"\n                },\n                {\n                    \"startAt\": \"23:60\",\n                    \"timeZoneName\": \"night\",\n                    \"title\": \"Hello\",\n                    \"subTitle\": \"bye anhquantran\"\n                },\n                {\n                    \"startAt\": \"24:01\",\n                    \"timeZoneName\": \"night\",\n                    \"title\": \"Good Morning\",\n                    \"subTitle\": \"hi bobo\"\n                },\n                {\n                    \"startAt\": \"18:00\",\n                    \"timeZoneName\": \"night\",\n                    \"title\": \"Good Evening\",\n                    \"subTitle\": 34\n                }\n            ],\n            \"specificDateTimes\": [\n                {\n                    \"startAt\": \"2021-12-24\",\n                    \"endAt\": \"2021-12-25 24:00:01\",\n                    \"title\": \"Merry Christmas\",\n                    \"subTitle\": \"HNY anhquantran\"\n                },\n                {\n                    \"startAt\": \"2021-01-01 00:00:60\",\n                    \"endAt\": \"2021-01-31 23:59\",\n                    \"title\": \"Happy New Year\",\n                    \"subTitle\": \"HNY anhquantran\"\n                },\n                {\n                    \"startAt\": \"2021-02-29 00:00:00\",\n                    \"endAt\": \"2021-01-32 23:59:59\",\n                    \"title\": \"Woman's Day\",\n                    \"subTitle\": \"HNY anhquantran\"\n                },\n                {\n                    \"startAt\": \"2021-04-31 23:59:59\",\n                    \"endAt\": \"2021-03-32 23:00:00\",\n                    \"title\": \"Woman's Day\",\n                    \"subTitle\": \"HNY anhquantran\"\n                },\n                {\n                    \"startAt\": \"2020-02-29 00:00:00\",\n                    \"endAt\": \"2020-02-30 23:59:59\",\n                    \"title\": \"Leap Year\",\n                    \"subTitle\": \"HNY anhquantran\"\n                },\n                {\n                    \"startAt\": \"2021-12 00:00:00\",\n                    \"endAt\": \"2021 23:59:59\",\n                    \"title\": \"Hello Decmember\",\n                    \"subTitle\": \"HNY anhquantran\"\n                },\n                {\n                    \"startAt\": \"2021-02-01 00:00:00\",\n                    \"endAt\": \"2021-01-31 23:59:59\",\n                    \"title\": \"Happy Febuary\",\n                    \"subTitle\": \"HNY anhquantran\"\n                }\n            ],\n            \"point\": 230,\n            \"badge\": {\n                \"home\": false,\n                \"measurement\": \"hello\",\n                \"coupon\": 20,\n                \"myKarte\": true,\n                \"applyIcon\": false\n            }\n        }\n    }\n}"
+				}
+			]
+		}
+	]
+}
